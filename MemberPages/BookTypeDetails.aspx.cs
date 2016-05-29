@@ -78,12 +78,19 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
                     {
                         using (SqlDataReader reader = sqlCommand.ExecuteReader())
                         {
+                            if (!IsPostBack)
+                            {
+                                WarehouseDropdown.Items.Clear();
+                            }
                             warehouseStocks = new Dictionary<string, WarehouseBookStock>();
                             while (reader.Read())
                             {
                                 WarehouseBookStock item = new WarehouseBookStock(reader);
                                 warehouseStocks.Add(item.code,item);
-                                WarehouseDropdown.Items.Add(item.code);
+                                if (!IsPostBack)
+                                {
+                                    WarehouseDropdown.Items.Add(item.code);
+                                }
                             }
                             DropDownList1_SelectedIndexChanged(null,null);
                         }
@@ -133,12 +140,14 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
             {
                 con.Open();
 
-                string isbnQuery = "select isbn from Book where book_id=" + book_id;
+                string isbnQuery = "select isbn from AvailableBook where book_id=@book_id and code=@code";
                 //ErrorLabel.Text = bookDetailsQuery;
                 using (SqlCommand sqlCommand = new SqlCommand(isbnQuery, con))
                 {
                     try
                     {
+                        sqlCommand.Parameters.AddWithValue("@book_id", book_id);
+                        sqlCommand.Parameters.AddWithValue("@code", WarehouseDropdown.SelectedItem.Text);
                         using (SqlDataReader reader = sqlCommand.ExecuteReader())
                         {
 

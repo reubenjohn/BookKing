@@ -41,7 +41,7 @@
     </div>
         <br />
         Select warehouse:
-        <asp:DropDownList ID="WarehouseDropdown" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+        <asp:DropDownList ID="WarehouseDropdown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
         </asp:DropDownList>
         <br />
         <br />
