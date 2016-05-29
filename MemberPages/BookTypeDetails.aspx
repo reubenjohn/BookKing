@@ -55,6 +55,8 @@
         <asp:Label ID="WarehouseAddress" runat="server"></asp:Label>
         <br />
         <br />
+        <asp:Label ID="PurchaseStatus" runat="server"></asp:Label>
+        <br />
         <asp:Button ID="BuyButton" runat="server" Text="Buy" Enabled="False" OnClick="BuyButton_Click" />
     </form>
 </body>

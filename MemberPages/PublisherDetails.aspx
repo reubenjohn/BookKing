@@ -20,7 +20,7 @@
         <p>
             Adress:
             <asp:Label ID="PublisherAdress" runat="server"></asp:Label>
-            $</p>
+        </p>
         <p>
             Phone:
             <asp:Label ID="PublisherPhone" runat="server"></asp:Label>

@@ -12,11 +12,11 @@ namespace BookKing.Models
 
         public BookDetails(SqlDataReader reader):base(reader)
         {
-            if (reader[fields.bookCount] != null) bookCount = reader[fields.bookCount].ToString();
+            if (reader[fields.availableStock] != null) bookCount = reader[fields.availableStock].ToString();
         }
 
         public static class fields{
-            public static readonly string bookCount = "bookCount";
+            public static readonly string availableStock = "availableStock";
         }
     }
 }

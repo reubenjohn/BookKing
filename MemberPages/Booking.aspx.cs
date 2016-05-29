@@ -19,7 +19,7 @@ public partial class Booking : System.Web.UI.Page
     {
         using (SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["conStr1"].ConnectionString))
         {
-            string selectQuery = "select * from dbo.book_type";
+            string selectQuery = "select * from AvailableBookTypeDetails";
             using (SqlCommand sqlCommand = new SqlCommand(selectQuery, con))
             {
                 try
@@ -31,7 +31,7 @@ public partial class Booking : System.Web.UI.Page
                     {
                         bookTypeList.Add(new BookType(reader));
                     }
-                    return bookTypeList.AsQueryable();
+                    return bookTypeList.AsQueryable<BookType>();
                 }
                 catch (Exception e)
                 {

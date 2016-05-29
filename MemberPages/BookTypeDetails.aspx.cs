@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -12,10 +13,12 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
 {
     private BookDetails bookDetails;
     private string book_id;
-    Dictionary<string,BookWarehouseStock> warehouseStocks;
+    Dictionary<string,WarehouseBookStock> warehouseStocks;
+    private string purchaseText;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        PurchaseStatus.Text = purchaseText;
         book_id = Request.QueryString["bookID"];
         using (SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["conStr1"].ConnectionString))
         {
@@ -23,17 +26,19 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
             {
                 con.Open();
 
-                string bookDetailsQuery = "select * from BookDetails where book_id=" + book_id;
-                //ErrorLabel.Text = bookDetailsQuery;
+                string bookDetailsQuery = "select * from BookTypeDetails where book_id=" + book_id;
+                ErrorLabel.Text = bookDetailsQuery;
                 using (SqlCommand sqlCommand = new SqlCommand(bookDetailsQuery, con))
                 {
+                    ErrorLabel.Text = "Opening connection to database...";
                     try
                     {
+                        ErrorLabel.Text = "Preparing reader...";
                         using (SqlDataReader reader = sqlCommand.ExecuteReader())
                         {
-
                             if (reader.Read())
                             {
+                                ErrorLabel.Text = "Loading book details...";
                                 bookDetails = new BookDetails(reader);
                                 BookTypeTitle.Text = bookDetails.title;
                                 BookDetailsPrice.Text = bookDetails.price;
@@ -53,15 +58,19 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
                                 }
 
                             }
+                            else
+                            {
+                                ErrorLabel.Text = "Failed to find the details of the required book!";
+                            }
                         }
                     }
                     catch (Exception err)
                     {
-                        //ErrorLabel.Text = err.ToString();
+                        ErrorLabel.Text = err.ToString();
                     }
                 }
 
-                string warehousesQuery = "select * from BookWarehouseStock where book_id=" + book_id;
+                string warehousesQuery = "select * from AvailableWarehouseBookStock where book_id=" + book_id;
                 //ErrorLabel.Text = warehousesQuery;
                 using (SqlCommand sqlCommand = new SqlCommand(warehousesQuery, con))
                 {
@@ -69,10 +78,10 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
                     {
                         using (SqlDataReader reader = sqlCommand.ExecuteReader())
                         {
-                            warehouseStocks = new Dictionary<string, BookWarehouseStock>();
+                            warehouseStocks = new Dictionary<string, WarehouseBookStock>();
                             while (reader.Read())
                             {
-                                BookWarehouseStock item = new BookWarehouseStock(reader);
+                                WarehouseBookStock item = new WarehouseBookStock(reader);
                                 warehouseStocks.Add(item.code,item);
                                 WarehouseDropdown.Items.Add(item.code);
                             }
@@ -94,24 +103,122 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
 
     protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        string warehouse_code = WarehouseDropdown.SelectedItem.Text;
-        BookWarehouseStock warehouseStock;
-        warehouseStocks.TryGetValue(warehouse_code,out warehouseStock);
+        if (WarehouseDropdown.SelectedItem != null && WarehouseDropdown.SelectedItem.Text != null) {
+            string warehouse_code = WarehouseDropdown.SelectedItem.Text;
+            WarehouseBookStock warehouseStock;
+            warehouseStocks.TryGetValue(warehouse_code, out warehouseStock);
 
-        if (warehouseStock != null)
-        {
-            WarehouseStock.Text = warehouseStock.code;
-            WarehouseAddress.Text = warehouseStock.ware_address;
-            WarehousePhone.Text = warehouseStock.ware_phone;
+            if (warehouseStock != null)
+            {
+                WarehouseStock.Text = warehouseStock.bookStock;
+                WarehouseAddress.Text = warehouseStock.ware_address;
+                WarehousePhone.Text = warehouseStock.ware_phone;
+            }
+            else
+            {
+                ErrorLabel.Text = "Could not find required warehouse: " + warehouse_code;
+            }
         }
         else
         {
-            ErrorLabel.Text = "Could not find required warehouse: "+warehouse_code;
+            WarehouseDropdown.Items.Add("No warehouse stocked");
         }
     }
 
     protected void BuyButton_Click(object sender, EventArgs e)
     {
+        using (SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["conStr1"].ConnectionString))
+        {
+            try
+            {
+                con.Open();
 
+                string isbnQuery = "select isbn from Book where book_id=" + book_id;
+                //ErrorLabel.Text = bookDetailsQuery;
+                using (SqlCommand sqlCommand = new SqlCommand(isbnQuery, con))
+                {
+                    try
+                    {
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+
+                            if (reader.Read())
+                            {
+                                string isbn = reader["isbn"].ToString();
+                                string email = Membership.GetUser().Email;
+                                string orderID = MemberPages_BookTypeDetails.RandomString(30);
+                                performPurchase(orderID, isbn, email);
+                            }
+                            else
+                            {
+                                ErrorLabel.Text = "No books in stock!";
+                            }
+                        }
+                    }
+                    catch (Exception err)
+                    {
+                        //ErrorLabel.Text = err.ToString();
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                ErrorLabel.Text = err.ToString();
+            }
+        }
+    }
+
+    private static string RandomString(int length)
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        var random = new Random();
+        return new string(Enumerable.Repeat(chars, length)
+          .Select(s => s[random.Next(s.Length)]).ToArray());
+    }
+
+    private void performPurchase(string orderID, string isbn, string email)
+    {
+        using (SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["conStr1"].ConnectionString))
+        {
+            try
+            {
+                con.Open();
+
+                string purchaseQuery = "insert into orders values(@orderId,@isbn,@email)";
+                //ErrorLabel.Text = bookDetailsQuery;
+                using (SqlCommand sqlCommand = new SqlCommand(purchaseQuery, con))
+                {
+                    try
+                    {
+                        sqlCommand.Parameters.AddWithValue("@orderId", orderID);
+                        sqlCommand.Parameters.AddWithValue("@isbn", isbn);
+                        sqlCommand.Parameters.AddWithValue("@email", email);
+                        int count = sqlCommand.ExecuteNonQuery();
+                        if(count==1)
+                        {
+                            purchaseText = "Purchase succesful!";
+                        }
+                        else if(count==0)
+                        {
+                            purchaseText = "Purchase was not made!";
+                        }
+                        else
+                        {
+                            purchaseText = "Purchase was made with errors";
+                        }
+                        PurchaseStatus.Text = purchaseText;
+                        Response.Redirect(Request.RawUrl);
+                    }
+                    catch (Exception err)
+                    {
+                        ErrorLabel.Text = err.ToString();
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                ErrorLabel.Text = err.ToString();
+            }
+        }
     }
 }

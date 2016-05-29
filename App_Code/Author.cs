@@ -14,7 +14,7 @@ namespace BookKing.Models
         public Author(SqlDataReader reader)
         {
             if(reader[BookType.fields.auth_name] !=null) auth_name = reader[BookType.fields.auth_name].ToString();
-            if (reader[auth_address] != null) auth_address = reader[auth_address].ToString();
+            if (reader[fields.auth_address] != null) auth_address = reader[fields.auth_address].ToString();
         }
 
         public static class fields

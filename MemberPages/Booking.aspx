@@ -32,13 +32,6 @@
                         <table>
                             <tr>
                                 <td>
-                                    <!--a href="ProductDetails.aspx?bookID=<%#:Item.book_id%>">
-                                        <img src="/Catalog/Images/Thumbs/Item.ImagePath"
-                                            width="100" height="75" style="border: solid" /></a-->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     <a href="BookTypeDetails.aspx?bookID=<%#:Item.book_id%>">
                                         <span>
                                             <%#:Item.title%>
