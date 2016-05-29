@@ -29,7 +29,9 @@
         <h1>
             My Home Page</h1>
         <p>
-        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/MemberPages/Booking.aspx">Bookings</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/MemberPages/Booking.aspx">Bookings</asp:HyperLink>
+            |
+            <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/MemberPages/MyOrders.aspx">My Orders</asp:HyperLink>
         </p>
     
     </div>

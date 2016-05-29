@@ -27,18 +27,18 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
                 con.Open();
 
                 string bookDetailsQuery = "select * from BookTypeDetails where book_id=" + book_id;
-                ErrorLabel.Text = bookDetailsQuery;
+                //ErrorLabel.Text = bookDetailsQuery;
                 using (SqlCommand sqlCommand = new SqlCommand(bookDetailsQuery, con))
                 {
-                    ErrorLabel.Text = "Opening connection to database...";
+                    //ErrorLabel.Text = "Opening connection to database...";
                     try
                     {
-                        ErrorLabel.Text = "Preparing reader...";
+                        //ErrorLabel.Text = "Preparing reader...";
                         using (SqlDataReader reader = sqlCommand.ExecuteReader())
                         {
                             if (reader.Read())
                             {
-                                ErrorLabel.Text = "Loading book details...";
+                                //ErrorLabel.Text = "Loading book details...";
                                 bookDetails = new BookDetails(reader);
                                 BookTypeTitle.Text = bookDetails.title;
                                 BookDetailsPrice.Text = bookDetails.price;

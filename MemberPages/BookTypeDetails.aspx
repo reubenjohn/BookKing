@@ -10,7 +10,7 @@
     <form id="form1" runat="server">
     <div>
     
-        <h1>Book Type Details</h1>
+        <h1>Book Details</h1>
         <p>
             <asp:Label ID="ErrorLabel" runat="server"></asp:Label>
         </p>
