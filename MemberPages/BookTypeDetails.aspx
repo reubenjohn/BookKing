@@ -22,27 +22,30 @@
 <p><div class="details">Publisher:</div><div class="detailsOfBook"><asp:HyperLink ID="BookDetailsPublisher" runat="server" NavigateUrl="~/MemberPages/PublisherDetails.aspx?publisherName=<%# pub_name %>">[BookDetailsPublisher]</asp:HyperLink></div></p>
 <p><div class="details">Total copies available in warehouse:</div><div class="detailsOfBook"><asp:Label ID="BookDetailsTotalStock" runat="server" Text="0"></asp:Label></div></p>
     </div>
-<div class="detailsNormalText">        <br />
-        <div class="selectWare">Select warehouse:
-        <asp:DropDownList ID="WarehouseDropdown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
-        </asp:DropDownList></div>
-        <br />
-        <br />
-        Available stock in warehouse:
-        <asp:Label ID="WarehouseStock" runat="server"></asp:Label>
-        <br />
-        Warehouse phone:
-        <asp:Label ID="WarehousePhone" runat="server"></asp:Label>
-        <br />
-        Warehouse address:
-        <asp:Label ID="WarehouseAddress" runat="server"></asp:Label>
-        <br />
-        <br />
-        <asp:Label ID="PurchaseStatus" runat="server"></asp:Label>
-        <br />
-        <asp:Button ID="BuyButton" runat="server" Text="Buy" Enabled="False" OnClick="BuyButton_Click" />
-    </div>
- </div>
+    <div class="detailsNormalText">        <br />
+            <div class="selectWare">Select warehouse:
+            <asp:DropDownList ID="WarehouseDropdown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+            </asp:DropDownList></div>
+            <br />
+            <br />
+            Available stock in warehouse:
+            <asp:Label ID="WarehouseStock" runat="server"></asp:Label>
+            <br />
+            Warehouse phone:
+            <asp:Label ID="WarehousePhone" runat="server"></asp:Label>
+            <br />
+            Warehouse address:
+            <asp:Label ID="WarehouseAddress" runat="server"></asp:Label>
+            <br />
+            <br />
+            <asp:Label ID="PurchaseStatus" runat="server"></asp:Label>
+            <br />
+            <asp:Button ID="BuyButton" runat="server" Text="Buy" Enabled="False" OnClick="BuyButton_Click" />
+            <br />
+            Your balance:
+            <asp:Label ID="CustomerBalance" runat="server"></asp:Label>
+        </div>
+     </div>
     </form>
 </body>
 </html>

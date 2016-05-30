@@ -19,7 +19,7 @@ namespace BookKing.Models
         {
             if(reader[fields.book_id]!=null) book_id= reader[fields.book_id].ToString();
             if (reader[fields.title] != null) title = reader[fields.title].ToString();
-            if (reader[fields.price] != null) price = reader[fields.price].ToString()+"$";
+            if (reader[fields.price] != null) price = reader[fields.price].ToString();
             if (reader[fields.pub_name] != null) pub_name = reader[fields.pub_name].ToString();
             if (reader[fields.auth_name] != null) auth_name = reader[fields.auth_name].ToString();
             if (reader[fields.year1] != null) year = reader[fields.year1].ToString();

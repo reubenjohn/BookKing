@@ -16,6 +16,7 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
     private string book_id;
     Dictionary<string,WarehouseBookStock> warehouseStocks;
     private string purchaseText;
+    private string email="reubenvjohn@gmail.com";
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -64,6 +65,34 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
                                     BuyButton.Enabled = true;
                                 }
 
+                            }
+                            else
+                            {
+                                ErrorLabel.Text = "Failed to find the details of the required book!";
+                            }
+                        }
+                    }
+                    catch (Exception err)
+                    {
+                        ErrorLabel.Text = err.ToString();
+                    }
+                }
+
+                string balanceQuery = "select balance from customer where cust_email='"+email+"'";
+                //ErrorLabel.Text = bookDetailsQuery;
+                using (SqlCommand sqlCommand = new SqlCommand(balanceQuery, con))
+                {
+                    //ErrorLabel.Text = "Opening connection to database...";
+                    try
+                    {
+                        //ErrorLabel.Text = "Preparing reader...";
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+                            //sqlCommand.Parameters.AddWithValue("@memail", email);
+                            if (reader.Read())
+                            {
+                                //ErrorLabel.Text = "Loading book details...";
+                                CustomerBalance.Text = reader["balance"].ToString();
                             }
                             else
                             {
@@ -168,7 +197,7 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
 
                         SqlParameter param3 = new SqlParameter("@cust_email", SqlDbType.VarChar);
                         param3.Size = 50;
-                        param3.Value = Membership.GetUser().Email;
+                        param3.Value = email;
                         param3.Direction = ParameterDirection.Input;
                         sqlCommand.Parameters.Add(param3);
                         
@@ -192,14 +221,6 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
                 ErrorLabel.Text = err.ToString();
             }
         }
-    }
-    
-    private static string RandomString(int length)
-    {
-        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        var random = new Random();
-        return new string(Enumerable.Repeat(chars, length)
-          .Select(s => s[random.Next(s.Length)]).ToArray());
     }
 
     private void performPurchase(string orderID, string isbn, string email)
