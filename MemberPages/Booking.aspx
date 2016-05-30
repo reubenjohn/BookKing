@@ -1,11 +1,12 @@
-﻿<%@ Page Title="Books" Language="C#" MasterPageFile="~/MasterPage.master"  AutoEventWireup="true" CodeFile="Booking.aspx.cs" Inherits="Booking" %>
+﻿<%@ Page Title="BOOKS" Language="C#" MasterPageFile="~/MasterPage.master"  AutoEventWireup="true" CodeFile="Booking.aspx.cs" Inherits="Booking" %>
 <asp:Content id="Content1" contentplaceholderid="ContentPlaceHolder1" runat="server">
     <section>
-        <div>
+        <div><div class="big">
             <hgroup>
-                <h2><%: Page.Title %>
-                </h2>
+                <h1><%: Page.Title %>
+                </h1>
             </hgroup>
+            </div>
             <asp:Label ID="Label1" runat="server"></asp:Label>
 
             <asp:ListView ID="bookList" runat="server"
@@ -32,16 +33,17 @@
                         <table>
                             <tr>
                                 <td>
-                                    <a href="BookTypeDetails.aspx?bookID=<%#:Item.book_id%>">
+                                    <div class="h2"><a href="BookTypeDetails.aspx?bookID=<%#:Item.book_id%>">
                                         <span>
                                             <%#:Item.title%>
                                         </span>
                                     </a>
                                     <br />
                                     <span>
-                                        <b>Price: </b><%#:String.Format("{0:c}", Item.price)%>
+                                        <b>Price: Rs. </b><%#:String.Format("{0:c}", Item.price)%>
                                     </span>
                                     <br />
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
