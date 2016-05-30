@@ -1,6 +1,7 @@
 ﻿using BookKing.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,12 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        updateBookDetails(IsPostBack);
+    }
+
+    private void updateBookDetails(bool isPostBack)
+    {
+
         PurchaseStatus.Text = purchaseText;
         book_id = Request.QueryString["bookID"];
         using (SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["conStr1"].ConnectionString))
@@ -51,7 +58,7 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
                                 BookDetailsAuthor.Text = bookDetails.auth_name;
 
                                 BookDetailsTotalStock.Text = bookDetails.bookCount;
-                                
+
                                 if (Int32.Parse(bookDetails.bookCount) > 0)
                                 {
                                     BuyButton.Enabled = true;
@@ -78,7 +85,7 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
                     {
                         using (SqlDataReader reader = sqlCommand.ExecuteReader())
                         {
-                            if (!IsPostBack)
+                            if (!isPostBack)
                             {
                                 WarehouseDropdown.Items.Clear();
                             }
@@ -86,13 +93,13 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
                             while (reader.Read())
                             {
                                 WarehouseBookStock item = new WarehouseBookStock(reader);
-                                warehouseStocks.Add(item.code,item);
-                                if (!IsPostBack)
+                                warehouseStocks.Add(item.code, item);
+                                if (!isPostBack)
                                 {
                                     WarehouseDropdown.Items.Add(item.code);
                                 }
                             }
-                            DropDownList1_SelectedIndexChanged(null,null);
+                            DropDownList1_SelectedIndexChanged(null, null);
                         }
                     }
                     catch (Exception err)
@@ -140,33 +147,43 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
             {
                 con.Open();
 
-                string isbnQuery = "select isbn from AvailableBook where book_id=@book_id and code=@code";
+                string isbnQuery = "purchaseBook";
                 //ErrorLabel.Text = bookDetailsQuery;
                 using (SqlCommand sqlCommand = new SqlCommand(isbnQuery, con))
                 {
                     try
                     {
-                        sqlCommand.Parameters.AddWithValue("@book_id", book_id);
-                        sqlCommand.Parameters.AddWithValue("@code", WarehouseDropdown.SelectedItem.Text);
-                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
-                        {
+                        sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                            if (reader.Read())
-                            {
-                                string isbn = reader["isbn"].ToString();
-                                string email = Membership.GetUser().Email;
-                                string orderID = MemberPages_BookTypeDetails.RandomString(30);
-                                performPurchase(orderID, isbn, email);
-                            }
-                            else
-                            {
-                                ErrorLabel.Text = "No books in stock!";
-                            }
-                        }
+                        SqlParameter parm1 = new SqlParameter("@book_id", SqlDbType.BigInt);
+                        parm1.Value = book_id;
+                        parm1.Direction = ParameterDirection.Input;
+                        sqlCommand.Parameters.Add(parm1);
+
+                        SqlParameter param2 = new SqlParameter("@code", SqlDbType.VarChar);
+                        param2.Size = 30;
+                        param2.Value = WarehouseDropdown.SelectedItem.Text;
+                        param2.Direction = ParameterDirection.Input;
+                        sqlCommand.Parameters.Add(param2);
+
+                        SqlParameter param3 = new SqlParameter("@cust_email", SqlDbType.VarChar);
+                        param3.Size = 50;
+                        param3.Value = Membership.GetUser().Email;
+                        param3.Direction = ParameterDirection.Input;
+                        sqlCommand.Parameters.Add(param3);
+                        
+                        SqlParameter resultParam = new SqlParameter("@mResult", SqlDbType.VarChar);
+                        resultParam.Size = 50;
+                        resultParam.Direction = ParameterDirection.Output; // This is important!
+                        sqlCommand.Parameters.Add(resultParam);
+
+                        sqlCommand.ExecuteNonQuery();
+                        PurchaseStatus.Text = resultParam.Value.ToString();
+                        updateBookDetails(IsPostBack);
                     }
                     catch (Exception err)
                     {
-                        //ErrorLabel.Text = err.ToString();
+                        ErrorLabel.Text = err.ToString();
                     }
                 }
             }
@@ -176,7 +193,7 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
             }
         }
     }
-
+    
     private static string RandomString(int length)
     {
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
