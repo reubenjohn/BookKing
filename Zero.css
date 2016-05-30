@@ -49,6 +49,18 @@ html {
     font-size: 20px;
 }
 
+.tip{
+    color:white;
+    font-family:Fredoka One, Constantia;
+    font-size: 17px;
+    background: #111111;
+    background-color: rgba(020,020,020,0.75);
+    border-radius: 10px;
+    margin: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+    
+}
 
 .detailsOfBook{
     font-family:Forte;

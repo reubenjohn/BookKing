@@ -47,6 +47,10 @@
     </div>
     </div>
         </div>
+        <div class="tip">
+            <p>*For simplicity of server configuration by examiner, authentication is currently disabled.</p>
+            <p>*Internet connection advised.</p>
+        </div>
     </form>
 </body>
 </html>
