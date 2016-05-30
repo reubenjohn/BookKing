@@ -17,7 +17,7 @@
    <div class="rightThem">
             <asp:LoginView ID="LoginView1" runat="server">
                 <AnonymousTemplate>
-                    <div class="mesg">You are not logged in.<br /></div> &nbsp;<asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Register.aspx"><div class="button"><font family="consolas" color="White">REGISTER</font>
+                    <div class="mesg">You are not logged in.<br /></div> &nbsp;<asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Register.aspx"><div class="button"><font family="consolas" color="White">Register</font>
 				</div></a></asp:HyperLink>
                 </AnonymousTemplate>
                 <LoggedInTemplate>
