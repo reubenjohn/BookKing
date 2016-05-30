@@ -44,7 +44,7 @@
             <br />
             <asp:Button ID="BuyButton" runat="server" Text="Buy" Enabled="False" OnClick="BuyButton_Click" />
             <br />
-            Your balance:
+            Available Balance: Rs. 
             <asp:Label ID="CustomerBalance" runat="server"></asp:Label>
         </div>
      </div>
