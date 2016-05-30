@@ -17,7 +17,7 @@
    <div class="rightThem">
             <asp:LoginView ID="LoginView1" runat="server">
                 <AnonymousTemplate>
-                    <div class="mesg">You are not logged in.<br /></div> &nbsp;<asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Register.aspx"><div class="button"><font family="consolas" color="White">REGISTER</font>
+                    <div class="mesg">You are not logged in.<br /></div> &nbsp;<asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Register.aspx"><div class="button"><font family="consolas" color="White">Register</font>
 				</div></a></asp:HyperLink>
                 </AnonymousTemplate>
                 <LoggedInTemplate>
@@ -40,10 +40,6 @@
 			<div id="padd" style="display: inline-flex;" class="gravit marginalize">
 				<asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/MemberPages/Booking.aspx"><div class="button"><font color="White">BOO<font color="gold">K</font>S</font>
 				</div></asp:HyperLink>&nbsp;&nbsp;&nbsp;<font color="white" size="25px"> | </font>&nbsp;&nbsp;&nbsp;
-				<a href="https://www.google.com"><div class="button"><font color="White">AUTHORS</font>
-				</div></a>&nbsp;&nbsp;&nbsp;<font color="white" size="25px"> | </font>&nbsp;&nbsp;&nbsp;
-				<a href="https://www.google.com"><div class="button"><font color="White">PUBLISHERS</font>
-				</div></a>&nbsp;&nbsp;&nbsp;<font color="white" size="25px"> | </font>&nbsp;&nbsp;&nbsp;
 				<asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/MemberPages/MyOrders.aspx"><div class="button"><font color="White">MY ORDERS
 				</div></asp:HyperLink>
 			</div></center>
