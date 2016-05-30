@@ -1,4 +1,5 @@
 USE [BookKing]
+use BookKing;
 go
 create view BookStock as
 select book_Type.book_id as book_id,

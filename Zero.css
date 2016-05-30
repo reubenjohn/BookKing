@@ -1,0 +1,167 @@
+html {
+	background: url("/IMG_9359.JPG") no-repeat center center fixed;  
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+.big{
+    font-size: 70px;
+}
+.details{
+    font-family: 'Showcard Gothic';
+    font-size: 25px;
+    color: gold;
+    padding: 10px 10px 10px 10px;
+}
+.mesg{
+    font-family:Consolas;
+    text-align:right;
+    font: bold;
+    color: gold;
+    padding-right:20px;
+    font-size:20px;
+}
+
+#BuyButton{
+    background:#111111;
+    background-color:rgba(020,020,020,0.6);
+    color:gold;
+    font-family:Fredoka One;
+    border:double;
+    border-radius:10px;
+    padding: 10px 40px 10px 40px;
+    margin: 10px 10px 10px 10px;
+    font-size: 20px;
+}
+
+
+.detailsOfBook{
+    font-family:Stencil;
+    font-size:30px;
+    color: white;
+}
+
+#WarehouseDropdown{
+    background: #111111;
+    background-color: rgba(020,020,020,1);
+    color:goldenrod;
+    font-family: Fredoka One;
+    font-size: 20px;
+    padding: 10px 10px 10px 10px;
+    border: solid;
+    border-radius: 10px;
+    border-color: #333333;
+    animation:backwards;
+}
+
+.selectWare{
+    font-size:30px;
+}
+
+.detailsNormalText{
+    font-family: Fredoka One;
+    font-size: 20px;
+}
+
+#BuyButton:hover{
+    cursor:pointer;
+}
+.h1 {
+	color: #EEEEEE;
+	font-family: 'Fredoka One', Monospace;
+	text-align: center;
+	padding-bottom: 100px;
+	background: #111111;
+	background-color: rgba(020,020,020,0.8);
+	-webkit-filter: blur(10);
+	border-radius: 10px;
+}
+
+.whiteIt{
+    color:white;
+}
+
+.rightThem{
+    padding-top: 20px;
+    display: inline-flex;
+}
+
+Hyperlink{
+    text-decoration:none;
+    color:white;
+}
+
+#padd{
+	padding-top: 60px;
+}
+
+.h2{
+    color:gold;
+    border:double;
+    border-color:gold;
+    border-width:1px;
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+    margin:10px,10px,10px,10px;
+    content:normal;
+    background:#333333;
+}
+
+a:link{
+    color:white;
+}
+a:visited{
+    color:#CCCCCC;
+}
+.button{
+    display: inline-flex;
+    font-family: monospace;
+     background-color: #68b12f;
+    background: -webkit-gradient(linear, left top, left bottom, from(#68b12f), to(#50911e));
+    background: -webkit-linear-gradient(top, #b1562f, #91341e);
+    background: -moz-linear-gradient(top, #b1562f, #91341e);
+    background: -ms-linear-gradient(top, #b1562f, #91341e);
+    background: -o-linear-gradient(top, #b1562f, #91341e);
+    background: linear-gradient(top, #b1562f, #91341e);
+    border: 1px solid #915000;
+    border-bottom: 1px solid #91552b;
+    padding-top: 40px;
+    padding-right: 40px;
+    padding-left:40px;
+    border-radius: 10px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    box-shadow: inset 0 1px 0 0 #9f5574;
+    -webkit-box-shadow: 0 1px 0 0 #9f5574 inset ;
+    -moz-box-shadow: 0 1px 0 0 #9f5574 inset;
+    -ms-box-shadow: 0 1px 0 0 #9f5574 inset;
+    -o-box-shadow: 0 1px 0 0 #9f5574 inset;
+    color: white;
+    font-size: 20px;
+    padding: 6px 20px;
+    text-align: left;
+    text-shadow: 0 -1px 0 #396715;
+}
+.button:hover{
+    cursor:pointer;
+    opacity: 0.85;
+}
+a{
+    display: block;
+}
+a:link{
+    text-decoration: none;
+}
+.gravit{
+	align-items: center;
+	padding-right: 30px;
+	padding-left: 30px;
+	text-indent: center;
+	margin: 0px;
+}
+.marginalize{
+	margin: 40px;
+}

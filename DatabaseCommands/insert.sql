@@ -258,10 +258,10 @@ INSERT INTO book_Type
 VALUES(849,1247890052,'The Jury Master',2006,'Thomson Reuters','Robert Dugoni');
 
 insert into Book values(1299983555127,1247890052,'MUM20459');
-insert into Book values(1299983555127,1247890052,'MUM20459');
-insert into Book values(1299983555127,1247890052,'DEL103041');
-insert into Book values(1299983555127,1247890052,'DEL103041');
-insert into Book values(1299983555127,1247890052,'DEL103041');
+insert into Book values(1299983555128,1247890052,'MUM20459');
+insert into Book values(1299983555129,1247890052,'DEL103041');
+insert into Book values(1299983555130,1247890052,'DEL103041');
+insert into Book values(1299983555131,1247890052,'DEL103041');
 
 
 --Robert Dugoni 3
@@ -315,7 +315,7 @@ insert into Book values(4151535521107,4735512117,'KOL700091');
 insert into Book values(4151535521108,4735512117,'MUM20459');
 insert into Book values(4151535521109,4735512117,'MUM20459');
 insert into Book values(4151535521110,4735512117,'KOL700091');
-insert into Book values(4151535521110,4735512117,'KOL700091');
+insert into Book values(4151535521111,4735512117,'KOL700091');
 
 --DAN BROWN 4
 --isbn values can be found for any given book

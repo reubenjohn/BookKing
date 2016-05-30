@@ -4,30 +4,37 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <link href="Zero.css" rel="stylesheet" />
     <title></title>
     <asp:ContentPlaceHolder id="head" runat="server">
+     <link href='https://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
     </asp:ContentPlaceHolder>
 </head>
 <body>
 
     <form id="form1" runat="server">
         
-        <p>
+        <div><div id="entire" class="h1">
+        <div>
+    
+   <div class="rightThem">
             <asp:LoginView ID="LoginView1" runat="server">
                 <AnonymousTemplate>
-                    You are not logged in.<br /> &nbsp;<asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Register.aspx">Register</asp:HyperLink>
+                    <div class="mesg">You are not logged in.<br /></div> &nbsp;<asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Register.aspx"><div class="button"><font family="consolas" color="White">REGISTER</font>
+				</div></a></asp:HyperLink>
                 </AnonymousTemplate>
                 <LoggedInTemplate>
-                    You are logged in. Welcome,
+                    <div class="mesg">You are logged in. Welcome,</div>
                     <asp:LoginName ID="LoginName1" runat="server" />
                     .
                     <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/MemberPages/ChangePassword.aspx">Change Password</asp:HyperLink>
                     &nbsp;|
                 </LoggedInTemplate>
-            </asp:LoginView>
-        <asp:LoginStatus ID="LoginStatus1" runat="server" />
-    
-        </p>
+            </asp:LoginView>&nbsp;&nbsp;&nbsp;
+        <div class="button whiteIt "><font color="white">
+				     <asp:LoginStatus ID="LoginStatus1" runat="server" /></font></div>
+    </div>
+   
     <div>
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         
