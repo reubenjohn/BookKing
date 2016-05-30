@@ -19,10 +19,10 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        updateBookDetails(IsPostBack);
+        updateUI(IsPostBack);
     }
 
-    private void updateBookDetails(bool isPostBack)
+    private void updateUI(bool isPostBack)
     {
 
         PurchaseStatus.Text = purchaseText;
@@ -76,8 +76,34 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
                         ErrorLabel.Text = err.ToString();
                     }
                 }
+                string customerBalanceQuery="select balance from customer";
+                using (SqlCommand sqlCommand = new SqlCommand(customerBalanceQuery, con))
+                {
+                    //ErrorLabel.Text = "Opening connection to database...";
+                    try
+                    {
+                        //ErrorLabel.Text = "Preparing reader...";
+                        using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                //ErrorLabel.Text = "Loading customer balance...";
+                                CustomerBalance.Text = reader["balance"].ToString();
 
-                string warehousesQuery = "select * from AvailableWarehouseBookStock where book_id=" + book_id;
+                            }
+                            else
+                            {
+                                ErrorLabel.Text = "Failed to find the details of the required book!";
+                            }
+                        }
+                    }
+                    catch (Exception err)
+                    {
+                        ErrorLabel.Text = err.ToString();
+                    }
+                }
+
+                    string warehousesQuery = "select * from AvailableWarehouseBookStock where book_id=" + book_id;
                 //ErrorLabel.Text = warehousesQuery;
                 using (SqlCommand sqlCommand = new SqlCommand(warehousesQuery, con))
                 {
@@ -141,15 +167,14 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
 
     protected void BuyButton_Click(object sender, EventArgs e)
     {
+        ErrorLabel.Text = "Initiating purchase...";
         using (SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["conStr1"].ConnectionString))
         {
             try
             {
                 con.Open();
-
-                string isbnQuery = "purchaseBook";
-                //ErrorLabel.Text = bookDetailsQuery;
-                using (SqlCommand sqlCommand = new SqlCommand(isbnQuery, con))
+                
+                using (SqlCommand sqlCommand = new SqlCommand("purchaseBook", con))
                 {
                     try
                     {
@@ -178,62 +203,10 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
                         sqlCommand.Parameters.Add(resultParam);
 
                         sqlCommand.ExecuteNonQuery();
+                        ErrorLabel.Text = "Performing purchase...";
                         PurchaseStatus.Text = resultParam.Value.ToString();
-                        updateBookDetails(IsPostBack);
-                    }
-                    catch (Exception err)
-                    {
-                        ErrorLabel.Text = err.ToString();
-                    }
-                }
-            }
-            catch (Exception err)
-            {
-                ErrorLabel.Text = err.ToString();
-            }
-        }
-    }
-    
-    private static string RandomString(int length)
-    {
-        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        var random = new Random();
-        return new string(Enumerable.Repeat(chars, length)
-          .Select(s => s[random.Next(s.Length)]).ToArray());
-    }
 
-    private void performPurchase(string orderID, string isbn, string email)
-    {
-        using (SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["conStr1"].ConnectionString))
-        {
-            try
-            {
-                con.Open();
-
-                string purchaseQuery = "insert into orders values(@orderId,@isbn,@email)";
-                //ErrorLabel.Text = bookDetailsQuery;
-                using (SqlCommand sqlCommand = new SqlCommand(purchaseQuery, con))
-                {
-                    try
-                    {
-                        sqlCommand.Parameters.AddWithValue("@orderId", orderID);
-                        sqlCommand.Parameters.AddWithValue("@isbn", isbn);
-                        sqlCommand.Parameters.AddWithValue("@email", email);
-                        int count = sqlCommand.ExecuteNonQuery();
-                        if(count==1)
-                        {
-                            purchaseText = "Purchase succesful!";
-                        }
-                        else if(count==0)
-                        {
-                            purchaseText = "Purchase was not made!";
-                        }
-                        else
-                        {
-                            purchaseText = "Purchase was made with errors";
-                        }
-                        PurchaseStatus.Text = purchaseText;
-                        Response.Redirect(Request.RawUrl);
+                        updateUI(IsPostBack);
                     }
                     catch (Exception err)
                     {

@@ -58,6 +58,9 @@
         <asp:Label ID="PurchaseStatus" runat="server"></asp:Label>
         <br />
         <asp:Button ID="BuyButton" runat="server" Text="Buy" Enabled="False" OnClick="BuyButton_Click" />
+        <br />
+        Your balance:
+        <asp:Label ID="CustomerBalance" runat="server"></asp:Label>
     </form>
 </body>
 </html>
