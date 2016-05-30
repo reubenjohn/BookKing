@@ -33,7 +33,7 @@
                     <td runat="server">
                         <table>
                             <tr>
-                                <td>
+                                <td><div class="h2">
                                     <a href="BookTypeDetails.aspx?bookID=<%#:Item.book_id%>">
                                         <span>
                                             <%#:Item.title%>
@@ -41,9 +41,10 @@
                                     </a>
                                     <br />
                                     <span>
-                                        <b>Price: </b><%#:String.Format("{0:c}", Item.price)%>
+                                        <b>Price: Rs. </b><%#:String.Format("{0:c}", Item.price)%>
                                     </span>
                                     <br />
+                                    </div>
                                 </td>
                             </tr>
                             <tr>

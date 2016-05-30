@@ -6,6 +6,7 @@ use BookKing;
 go
 
 
+
 --creation of tables as per the drawn schema
 CREATE TABLE author(
 auth_name varchar(30) primary key,
