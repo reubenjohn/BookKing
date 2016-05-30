@@ -14,6 +14,10 @@ html {
     color: gold;
     padding: 10px 10px 10px 10px;
 }
+
+.paddin{
+    padding: 20px 20px 20px 20px;
+}
 .mesg{
     font-family:Consolas;
     text-align:right;
@@ -21,6 +25,16 @@ html {
     color: gold;
     padding-right:20px;
     font-size:20px;
+}
+
+.author{
+    color:white;
+    font-family:Forte;
+    font-size:40px;
+}
+
+.authorDetail{
+    font-size:25px;
 }
 
 #BuyButton{
