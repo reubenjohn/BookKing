@@ -4,9 +4,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <link href="Zero.css" rel="stylesheet" />
-    <title></title>
 </head>
+    <title></title>
 <body>
     <form id="form1" runat="server">
     <div>
