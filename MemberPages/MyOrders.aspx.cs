@@ -26,7 +26,7 @@ public partial class Booking : System.Web.UI.Page
             {
                 try
                 {
-                    sqlCommand.Parameters.AddWithValue("@cust_email",Membership.GetUser().Email);
+                    sqlCommand.Parameters.AddWithValue("@cust_email", GlobalConfig.email);
                     con.Open();
                     SqlDataReader reader = sqlCommand.ExecuteReader();
                     List<BookType> bookTypeList = new List<BookType>();

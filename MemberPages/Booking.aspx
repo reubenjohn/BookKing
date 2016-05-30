@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="BOOKS" Language="C#" MasterPageFile="~/MasterPage.master"  AutoEventWireup="true" CodeFile="Booking.aspx.cs" Inherits="Booking" %>
 <asp:Content id="Content1" contentplaceholderid="ContentPlaceHolder1" runat="server">
     <section>
+        <h1>
+            <div class="home"><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default.aspx">< Home </asp:HyperLink></div>
         <div><div class="big">
             <hgroup>
                 <h1><%: Page.Title %>

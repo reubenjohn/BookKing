@@ -16,7 +16,6 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
     private string book_id;
     Dictionary<string,WarehouseBookStock> warehouseStocks;
     private string purchaseText;
-    private string email="reubenvjohn@gmail.com";
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -78,7 +77,7 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
                     }
                 }
 
-                string balanceQuery = "select balance from customer where cust_email='"+email+"'";
+                string balanceQuery = "select balance from customer where cust_email='"+GlobalConfig.email+"'";
                 //ErrorLabel.Text = bookDetailsQuery;
                 using (SqlCommand sqlCommand = new SqlCommand(balanceQuery, con))
                 {
@@ -197,7 +196,7 @@ public partial class MemberPages_BookTypeDetails : System.Web.UI.Page
 
                         SqlParameter param3 = new SqlParameter("@cust_email", SqlDbType.VarChar);
                         param3.Size = 50;
-                        param3.Value = email;
+                        param3.Value = GlobalConfig.email;
                         param3.Direction = ParameterDirection.Input;
                         sqlCommand.Parameters.Add(param3);
                         

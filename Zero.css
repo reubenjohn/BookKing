@@ -165,3 +165,8 @@ a:link{
 .marginalize{
 	margin: 40px;
 }
+.home{
+    text-align: left;
+    font-size: 20px;
+    padding: 10px 10px 10px 10px;
+}

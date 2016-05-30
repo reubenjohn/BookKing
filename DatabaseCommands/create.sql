@@ -1,5 +1,6 @@
 -- Creating the new database
 create database BookKing;
+go
 --to create tables in it, we need to 'use' it ;)
 use BookKing;
 go
@@ -20,7 +21,8 @@ CREATE TABLE customer(
 cust_name varchar(30),
 cust_email varchar(50) primary key,
 cust_address varchar(50),
-cust_phone numeric);
+cust_phone numeric,
+balance numeric(10,2) check(balance>0) default 5000);
 
 CREATE TABLE warehouse(
 code varchar(30) primary key,

@@ -12,7 +12,9 @@
     <form id="form1" runat="server">
     <div class="h1">
     
-        <h1><div style="font-family:'Fredoka One';font-size:50px;">Book Details</div></h1>
+        <h1>
+            <div class="home"><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default.aspx">< Home </asp:HyperLink></div>
+        <div style="font-family:'Fredoka One';font-size:50px;">Book Details</div></h1>
         <div class="overall">
 <asp:Label ID="ErrorLabel" runat="server"></asp:Label>
 <p><div class="details">Title:</div><div class="detailsOfBook"><asp:Label ID="BookTypeTitle" runat="server" Text="Book Title"></asp:Label></div></p>

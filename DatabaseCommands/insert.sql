@@ -18,7 +18,7 @@ INSERT INTO author
 VALUES('Charles Dickens','Landport, Hampshire, England');
 
 --Enter team member details for beta testing
-INSERT INTO customer
+INSERT INTO customer(cust_name,cust_email,cust_address,cust_phone)
 VALUES('Ayush Soni','ayushsoni.in@gmail.com','CG-78, Salt Lake, Kolkata',09901363109);
 
 
@@ -45,7 +45,7 @@ VALUES('10112IQ91RS',9781783220120,'ayushsoni.in@gmail.com');
 
 --CHARLES DICKENS 2
 --Enter team member details for beta testing
-INSERT INTO customer
+INSERT INTO customer(cust_name,cust_email,cust_address,cust_phone)
 VALUES('Saksham Garg','garg.saksham@yahoo.com','Flat no. 608, HEWO, Gurgaon',08861188776);
 
 --isbn values can be found for any given book
@@ -102,8 +102,8 @@ INSERT INTO author
 VALUES('Jane Austen','Chawton, Alton, Hampshire, England');
 
 --Enter team member details for beta testing
-INSERT INTO customer
-VALUES('Reuben John','reubenv.john@gmail.com','Alhamra Tower, Kuwait',09876543210);
+INSERT INTO customer(cust_name,cust_email,cust_address,cust_phone)
+VALUES('Reuben John','reubenvjohn@gmail.com','Alhamra Tower, Kuwait',09876543210);
 
 --isbn values can be found for any given book
 INSERT INTO book_Type
@@ -167,7 +167,7 @@ INSERT INTO author
 VALUES('Jeffrey Archer','London, United Kingdom');
 
 --Enter team member details for beta testing
-INSERT INTO customer
+INSERT INTO customer(cust_name,cust_email,cust_address,cust_phone)
 VALUES('Mansi Somani','mansisomani111@gmail.com','Hyderabad',07022020100);
 
 --isbn values can be found for any given book

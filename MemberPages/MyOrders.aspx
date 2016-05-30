@@ -2,6 +2,8 @@
 <asp:Content id="Content1" contentplaceholderid="ContentPlaceHolder1" runat="server">
     <section>
         <div>
+        <h1>
+            <div class="home"><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default.aspx">< Home </asp:HyperLink></div>
             <hgroup>
                 <h2><%: Page.Title %>
                 </h2>
